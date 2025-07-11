@@ -1,0 +1,38 @@
+ALGORITHM sentence_analysis
+VAR
+    sentence : STRING
+    counter1 : INTEGER := 0  // For length
+    counter2 : INTEGER := 0  // For word count
+    counter3 : INTEGER := 0  // For vowel count
+    in_word : BOOLEAN := FALSE
+    i : INTEGER
+
+BEGIN
+    Write("Enter a sentence that ends with a period:")
+    Read(sentence)
+
+    IF sentence[length of sentence - 1] ≠ '.' THEN
+        Write("The sentence must end with a period.")
+    ELSE
+        FOR i := 0 TO length of sentence - 1 DO
+            counter1 := counter1 + 1  // Length
+
+            IF sentence[i] IN ('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U') THEN
+                counter3 := counter3 + 1  // Vowel count
+            END_IF
+
+            IF sentence[i] ≠ ' ' AND sentence[i] ≠ '.' THEN
+                IF in_word = FALSE THEN
+                    counter2 := counter2 + 1  // Word count
+                    in_word := TRUE
+                END_IF
+            ELSE
+                in_word := FALSE
+            END_IF
+        END_FOR
+
+        Write("Length of the sentence: ", counter1)
+        Write("Number of words: ", counter2)
+        Write("Number of vowels: ", counter3)
+    END_IF
+END
